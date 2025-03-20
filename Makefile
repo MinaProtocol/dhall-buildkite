@@ -18,5 +18,5 @@ format:
 
 all_checks: check_syntax lint format  
 
-generate: all_checks
+generate:
 	./gen.sh
