@@ -1,29 +1,27 @@
-on:
-  push:
-    branches:
-      - main
+
+on: push
 
 jobs:
+
 
   validate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Build
         run: |
           make all
 
-  generate:
+  generate: 
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    needs: validate
 
+    steps:      
       - name: Generate
         run: |
-          make generate
+            make generate
 
   # Deploy job
   deploy:
@@ -45,10 +43,9 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4 # or specific "vX.X.X" version tag for this action
+        uses: actions/deploy-pages@4 # or specific "vX.X.X" version tag for this action
         with:
-          site-directory: ./${{ github.ref }}/out
-          folder: ./out
-          branch: gh-pages
-          message: Deploy site
-          token: ${{ secrets.GITHUB_TOKEN }}
+          site-directory: ./out
+          target-branch: gh-pages
+          commit-message: Deploy site
+          publish-token: ${{ secrets.GITHUB_TOKEN }}
