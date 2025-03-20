@@ -12,7 +12,7 @@ jobs:
 
       - name: Build
         run: |
-          make all
+          make all_checks
 
   generate: 
     runs-on: ubuntu-latest
