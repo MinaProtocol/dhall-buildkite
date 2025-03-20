@@ -38,7 +38,6 @@ jobs:
     # Deploy to the github-pages environment
     environment:
       name: github-pages
-      name: github-pages-env
 
     # Specify runner + deployment step
     runs-on: ubuntu-latest
