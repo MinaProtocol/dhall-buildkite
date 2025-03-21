@@ -36,9 +36,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
 
-    
-
-    # Specify runner + deployment step
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
