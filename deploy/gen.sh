@@ -36,5 +36,6 @@ echo "}" >> "$output_file"
 
 CHECKSUM=$(sha256sum "$output_file" | awk '{print $1}')
 
-echo "Generated $output_file with checksum $CHECKSUM"
+echo ls --recursive releases
 
+echo "Generated $output_file with checksum $CHECKSUM"
