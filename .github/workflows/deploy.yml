@@ -48,7 +48,7 @@ jobs:
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-            token: ${{ secrets.ACCESS_TOKEN }}
+            token: ${{ secrets.GITHUB_TOKEN }}
             commit-message: 'Test commit'
             folder: out
             single-commit: true
