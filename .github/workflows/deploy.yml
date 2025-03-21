@@ -50,7 +50,8 @@ jobs:
         with:
             token: ${{ secrets.ACCESS_TOKEN }}
             commit-message: 'Test commit'
-            folder: out
+            folder: releases
+            target-folder: .
             single-commit: true
             clean: true
             silent: false

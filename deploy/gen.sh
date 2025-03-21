@@ -2,14 +2,21 @@
 
 # This script needs to be executed at the root of the project
 
-mkdir -p out
 
-output_file="out/Base.dhall"
 
 # Clear the output file if it exists
-> "$output_file"
-
 counter=1
+
+# Get the latest GitHub tag
+latest_tag=$(git describe --tags $(git rev-list --tags --max-count=1))
+
+echo "Latest GitHub tag: $latest_tag"
+
+mkdir -p releases/$latest_tag
+
+cp deploy/index.html releases/index.html
+output_file="releases/$latest_tag/package.dhall"
+
 
 for file in $(find src -type f -name "*.dhall"); do
     filename=$(basename "$file" .dhall)

@@ -18,5 +18,9 @@ format:
 
 all_checks: check_syntax lint format  
 
+clean:
+	rm -rf ./1.*.*/
+
 generate:
-	./gen.sh
+	./deploy/gen.sh
+
