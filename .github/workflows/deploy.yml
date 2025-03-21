@@ -40,11 +40,7 @@ jobs:
       - name: Generate
         run: |
             make generate
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@4 # or specific "vX.X.X" version tag for this action
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          site-directory: ./out
-          target-branch: gh-pages
-          commit-message: Deploy site
-          publish-token: ${{ secrets.GITHUB_TOKEN }}
+          folder: out
