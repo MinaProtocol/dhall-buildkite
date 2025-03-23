@@ -14,8 +14,8 @@ echo "Latest GitHub tag: $latest_tag"
 
 mkdir -p releases/$latest_tag
 
-cp release/resources/index.html releases/index.html
-cp release/resources/changelog.md releases/$latest_tag/changelog.md
+cp release/template/index.html releases/index.html
+cp release/template/changelog.md releases/$latest_tag/changelog.md
 
 output_file="releases/$latest_tag/package.dhall"
 
