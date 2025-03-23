@@ -26,7 +26,7 @@ in  Pipeline.build
             , label = "Hello world"
             , key = "hello-world"
             , target = Size.Multi
-            , docker = Some Docker::{ image = "debian:focal" }
+            , docker = None Docker.Type
             }
         ]
       }
