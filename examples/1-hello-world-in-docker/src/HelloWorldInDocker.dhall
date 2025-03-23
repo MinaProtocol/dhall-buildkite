@@ -27,7 +27,7 @@ in  (Pipeline.build
             , key = "hello-world-in-docker"
             , target = Size.Multi
             , docker = Some Docker::{
-              , image = "debian:focal"
+              , image = "alpine:3.10"
               }
             }
         ]
