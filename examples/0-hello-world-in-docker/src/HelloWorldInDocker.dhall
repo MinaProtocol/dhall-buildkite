@@ -1,5 +1,5 @@
 let Base =
-      https://s3.us-west-2.amazonaws.com/dhall.packages.minaprotocol.com/buildkite/releases/1.0.0/package.dhall sha256:71e937f539a066733a4918f79d65184192c35dd2c1c29cfa519e4f9e0cf9545e
+      https://s3.us-west-2.amazonaws.com/dhall.packages.minaprotocol.com/buildkite/releases/1.0.0/package.dhall sha256:e9f8f4891b01836575b565eb9d9f56bfe40eb4cc5b3f617c93f563d74ef5288c
 
 let Cmd = Base.Lib.Cmds
 
