@@ -16,6 +16,7 @@ mkdir -p releases/$latest_tag
 
 cp release/template/index.html releases/index.html
 cp release/template/changelog.md releases/$latest_tag/changelog.md
+cp -R src releases/$latest_tag/src
 
 output_file="releases/$latest_tag/package.dhall"
 
@@ -23,14 +24,15 @@ output_file="releases/$latest_tag/package.dhall"
 for file in $(find src -type f -name "*.dhall"); do
     filename=$(basename "$file" .dhall)
     filepath=$(dirname "$file" | sed 's|^src/||')
-    
+    filepath=$(echo "$filepath" | tr '/' '.')
+
     if [[ $counter -eq 1 ]]; then
       prefix="{"
     else 
       prefix=","
     fi
 
-    echo "$prefix $filepath/$filename = (./$file)" >> "$output_file"
+    echo "$prefix $filepath.$filename = (./$file)" >> "$output_file"
     
     ((counter++))
 done
