@@ -22,5 +22,8 @@ clean:
 	rm -rf ./releases/
 
 generate:
-	./deploy/gen.sh
+	./release/generate.sh
 
+release: clean all_checks generate upload
+
+.PHONY: check_syntax check_lint check_format lint format all_checks clean generate upload release

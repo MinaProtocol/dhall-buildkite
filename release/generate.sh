@@ -14,7 +14,9 @@ echo "Latest GitHub tag: $latest_tag"
 
 mkdir -p releases/$latest_tag
 
-cp deploy/index.html releases/index.html
+cp release/resources/index.html releases/index.html
+cp release/resources/changelog.md releases/$latest_tag/changelog.md
+
 output_file="releases/$latest_tag/package.dhall"
 
 
@@ -39,3 +41,8 @@ CHECKSUM=$(sha256sum "$output_file" | awk '{print $1}')
 echo ls --recursive releases
 
 echo "Generated $output_file with checksum $CHECKSUM"
+
+echo "Release $latest_tag is ready to be published"
+
+REPLACEMENT="<li>\n<a href=\"./${latest_tag}/package.dhall\">${latest_tag}/package.dhall</a>\n<p>Import this version with:</p>\n<pre><code>https://minaprotocol.github.io/dhall-base/${latest_tag}/package.dhall sha256:${CHECKSUM}</code></pre>\n<p>\n<a href=\"./${latest_tag}/changelog.md\"> Changelog for ${latest_tag} version </a>\n</li>\n<!-- Add more releases as needed -->"
+sed -i "s|<!-- Add more releases as needed -->|${REPLACEMENT}|" releases/index.html
