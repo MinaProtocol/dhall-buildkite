@@ -18,5 +18,12 @@ format:
 
 all_checks: check_syntax lint format  
 
-generate: all_checks
-	./gen.sh
+clean:
+	rm -rf ./releases/
+
+generate:
+	./release/generate.sh
+
+release: clean all_checks generate upload
+
+.PHONY: check_syntax check_lint check_format lint format all_checks clean generate upload release
