@@ -16,7 +16,14 @@ lint:
 format:
 	find ./src/ -name "*.dhall" -print0 | xargs -I{} -0 -n1 bash -c 'echo "{}" && dhall --ascii format --inplace {} || exit 255'
 
-all_checks: check_syntax lint format  
+format_examples:
+	find ./examples/ -name "*.dhall" -print0 | xargs -I{} -0 -n1 bash -c 'echo "{}" && dhall --ascii format --inplace {} || exit 255'
+
+lint_examples:
+	find ./examples/ -name "*.dhall" -print0 | xargs -I{} -0 -n1 bash -c 'echo "{}" && dhall --ascii format --inplace {} || exit 255'
+
+
+all_checks: check_syntax lint format lint_examples format_examples
 
 clean:
 	rm -rf ./releases/

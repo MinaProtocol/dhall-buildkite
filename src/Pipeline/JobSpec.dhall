@@ -8,5 +8,10 @@ in  { Type =
         , mode : PipelineMode.Type
         , dirtyWhen : List SelectFiles.Type
         }
-    , default = { path = ".", mode = PipelineMode.Type.PullRequest }
+    , default =
+        { path = "."
+        , name = ""
+        , mode = PipelineMode.Type.PullRequest
+        , dirtyWhen = [] : List SelectFiles.Type
+        }
     }

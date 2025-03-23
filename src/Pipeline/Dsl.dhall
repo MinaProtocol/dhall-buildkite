@@ -15,7 +15,7 @@ let Pipeline/Type = ./Type.dhall
 
 let Config =
       { Type = { spec : JobSpec.Type, steps : List Command.Type }
-      , default = {=}
+      , default = { spec = JobSpec.default, steps = [] : List Command.Type }
       }
 
 let CompoundType = { pipeline : Pipeline/Type, spec : JobSpec.Type }
