@@ -13,7 +13,7 @@ let Docker = Base.Command.Docker.Type
 
 let Size = Base.Command.Size
 
-in  Pipeline.build
+in  (Pipeline.build
       Pipeline.Config::{
       ,  spec = JobSpec::{
         , name = "HelloWorldInDocker"
@@ -29,4 +29,4 @@ in  Pipeline.build
             , docker = None Docker.Type
             }
         ]
-      }
+      }).pipeline
