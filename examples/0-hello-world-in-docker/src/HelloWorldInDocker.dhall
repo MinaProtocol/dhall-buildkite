@@ -15,6 +15,10 @@ let Size = Base.Command.Size
 
 in  Pipeline.build
       Pipeline.Config::{
+      ,  spec = JobSpec::{
+        , name = "HelloWorldInDocker"
+        , path = "."
+        }
       , steps =
         [ Command.build
             Command.Config::{
