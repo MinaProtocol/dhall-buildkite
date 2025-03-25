@@ -7,19 +7,20 @@ let Pipeline = Base.Pipeline.Dsl
 
 let Command = Base.Command.Base
 
-let Docker = Base.Command.Docker.Type
+let Docker = Base.Lib.Cmds.Docker
 
 let Size = Base.Command.Size
 
 in  Pipeline.build
         [ Command.build
             Command.Config::{
-            , commands = [ Cmd.run "echo hello world in docker" ]
-            , label = "Hello world In Docker"
-            , key = "hello-world-in-docker"
+            , commands = [ 
+                Cmd.run "echo hello world outside docker" 
+                , Cmd.runInDocker (Docker::{ image = "alpine:3.10" }) "echo hello world in docker"
+              ]
+            , label = "Mixed commands"
+            , key = "mixed-commands"
             , target = Size.Multi
-            , docker = Some Docker::{
-              , image = "alpine:3.10"
-              }
             }
         ]
+      

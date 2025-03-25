@@ -3,30 +3,19 @@ let Base =
 
 let Cmd = Base.Lib.Cmds
 
-let Pipeline = Base.Pipeline.Dsl
-
-let JobSpec = Base.Pipeline.JobSpec
+let Pipeline = Base.Pipeline.Type
 
 let Command = Base.Command.Base
-
-let Docker = Base.Command.Docker.Type
 
 let Size = Base.Command.Size
 
 in  (Pipeline.build
-      Pipeline.Config::{
-      ,  spec = JobSpec::{
-        , name = "HelloWorldInDocker"
-        , path = "."
-        }
-      , steps =
-        [ Command.build
+      [ Command.build
             Command.Config::{
             , commands = [ Cmd.run "echo hello world" ]
             , label = "Hello world"
             , key = "hello-world"
             , target = Size.Multi
-            , docker = None Docker.Type
             }
         ]
-      }).pipeline
+    )

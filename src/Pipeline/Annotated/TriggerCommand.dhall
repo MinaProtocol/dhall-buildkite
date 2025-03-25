@@ -1,4 +1,4 @@
-let Cmd = ../Lib/Cmds.dhall
+let Cmd = ../../Lib/Cmds.dhall
 
 in    (     \(dhallPipelineRelativeToBuildKiteDir : Text)
         ->  Cmd.quietly
