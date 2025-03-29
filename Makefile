@@ -27,14 +27,27 @@ all_checks: check_syntax lint format lint_examples format_examples
 
 clean:
 	rm -rf ./releases/
+	rm -rf ./out/
+
+build_package: clean
+	./release/build_package.sh out
+
+build_examples:  build_package
+	./release/build_examples.sh
+
+check_examples: build_examples
+	# globstar doesn't work on macOS bash :facepalm:, so we can't glob
+	# xargs will short-circuit if a command fails with code 255
+	find ./examples/ -name "*.dhall" -print0 | xargs -I{} -0 -n1 bash -c 'echo "{}" &&  dhall --file {} > /dev/null || exit 255'
+
 
 generate:
 	./release/generate.sh
 
-release: clean all_checks generate upload
-
 upload_release:
 	aws s3 sync releases s3://dhall.packages.minaprotocol.com/buildkite/releases --acl public-read
 
+release: clean all_checks build_package build_examples check_examples generate
+	rm -rf ./out/
 
-.PHONY: check_syntax check_lint check_format lint format all_checks clean generate upload release
+.PHONY: check_syntax check_lint check_format lint format all_checks clean generate upload release upload_release
