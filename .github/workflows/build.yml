@@ -1,0 +1,36 @@
+name: Build and Test
+
+on:
+    push:
+    pull_request:
+
+jobs:
+    build:
+        name: Build and Test
+        runs-on: ubuntu-latest
+
+        steps:
+          - name: "Checkout code"
+            uses: actions/checkout@v3
+
+
+          - name: "Set up Dhall 1.15.0"
+            run: |
+                    sudo apt-get update
+                    sudo apt-get install -y dhall=1.15.0 dhall-lsp-server
+                    dhall --version
+
+          - name: "Syntax Check"
+            run: make check_syntax
+
+          - name: "Lint Check"
+            run: make check_lint
+
+          - name: "Format Check"
+            run: make check_format
+
+          - name: "Examples Check"
+            run: make check_format
+
+          - name: "Test Release"
+            run: make release
