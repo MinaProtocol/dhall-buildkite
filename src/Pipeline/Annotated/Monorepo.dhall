@@ -1,3 +1,26 @@
+{-|
+# Monorepo Module
+
+This module provides functionality to filter out jobs based on `scope` and `filter`. 
+It is designed to work with a monorepo setup where jobs are defined with specific tags and scopes.
+
+## Features
+
+- Filters jobs based on tags and scope.
+- Supports custom filtering logic by overriding `filter` and `tags` modules.
+- Generates a pipeline configuration for Buildkite with the filtered jobs.
+- Allows prefix commands to be added before the filtered job commands.
+
+## Usage
+
+To use this module in your client code:
+
+1. Override the `filter` and `tags` modules as needed.
+2. Provide the required inputs: `filterName`, `tags`, `scope`, `jobs`, and `prefixCommands`.
+3. The module will return a pipeline configuration that can be used in Buildkite.
+-}
+
+
 let Tag = ./Tag.dhall
 
 let Scope = ./Scope.dhall

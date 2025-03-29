@@ -1,9 +1,10 @@
 -- Scope defines job selection strategy based on the type of the change
 --
 -- Goal of the pipeline can be either quick feedback for CI changes
--- or Nightly run which supposed to be run only on stable changes.
+-- or Nightly run which supposed to be run only on nightly changes.
 -- PullRequest - filter eligible jobs based on Scopes and then apply triage based on changed made in PR
 -- Stable - filter only eligible jobs and do not perform triage
+
 let Prelude = ../../External/Prelude.dhall
 
 let List/any = Prelude.List.any

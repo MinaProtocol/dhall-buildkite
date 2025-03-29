@@ -1,3 +1,13 @@
+{-|
+This module aggregates support for three plugins in Buildkite:
+
+1. **Docker**: Provides functionality for managing Docker containers within Buildkite pipelines.
+2. **Docker Login**: Handles authentication with Docker registries to enable pulling and pushing Docker images.
+3. **Summon**: Integrates with Summon to securely inject AWS environment variables into the Buildkite pipeline.
+
+By combining these plugins, this module simplifies the configuration and management of Buildkite pipelines that require Docker operations, secure registry access, and AWS environment variable handling.
+-}
+
 let B = ../External/Buildkite.dhall
 
 let Prelude = ../External/Prelude.dhall

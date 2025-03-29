@@ -1,4 +1,23 @@
--- A DSL for manipulating commands and their execution environments
+{-|
+This module provides a low-level mapping for executing commands in Buildkite.
+
+It includes functions for running commands, chaining them together, and
+running them in Docker containers. It also provides a way to handle
+caching through Docker.
+The module is designed to be used as a building block for higher-level
+command execution and caching strategies. 
+
+Example usage:
+<pre>
+    ...
+    , commands = [ Cmd.run "echo hello world in docker" ]
+    ...
+</pre>
+
+Above code is used in Base.dhall to define the `commands` field in a Buildkite
+
+-}
+
 let Prelude = ../External/Prelude.dhall
 
 let P = Prelude

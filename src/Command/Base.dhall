@@ -38,7 +38,7 @@ let TaggedKey = ./TaggedKey.dhall
 let Config =
       { Type =
           { commands : List Cmd.Type
-          , depends_on : List Text
+          , depends_on : List TaggedKey.Type
           , artifact_paths : List SelectFiles.Type
           , env : List TaggedKey.Type
           , label : Text
@@ -55,7 +55,7 @@ let Config =
           , timeout_in_minutes : Optional Integer
           }
       , default =
-          { depends_on = [] : List Text
+          { depends_on = [] : List TaggedKey.Type
           , docker = None Docker.Type
           , docker_login = None DockerLogin.Type
           , summon = None Summon.Type
@@ -78,7 +78,7 @@ let build
           , commands =
               B.definitions/commandStep/properties/commands/Type.ListString
                 (Decorate.decorateAll c.commands)
-          , depends_on = DependsOn.ofTexts c.depends_on
+          , depends_on = DependsOn.ofTaggedKeys c.depends_on
           , artifact_paths = ArtifactPaths c.artifact_paths
           , key = Some c.key
           , label = Some c.label

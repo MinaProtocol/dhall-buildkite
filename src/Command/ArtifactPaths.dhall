@@ -1,4 +1,11 @@
--- Commands are the individual command steps that CI runs
+{-|
+
+Defines a function that processes a list of artifact paths 
+and returns a Buildkite-compatible artifact paths type. 
+
+It is used to bridge artifact path definitions with Buildkite's requirements.
+
+-}
 
 let B = ../External/Buildkite.dhall
 

@@ -1,3 +1,9 @@
+{-|
+This module is responsible for filtering out tags that are assigned to jobs.
+It is utilized in the monorepo module to help identify and filter only the 
+necessary jobs that need to be executed.
+-}
+
 let Prelude = ../../External/Prelude.dhall
 
 let Tag = ./Tag.dhall

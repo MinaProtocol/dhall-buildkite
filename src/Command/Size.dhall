@@ -1,3 +1,32 @@
+{-|
+This module defines a `Size` type and provides functions to map specific `Size` values
+to agent tags in the form of a Dhall map.
+
+- **Purpose**: The code maps `Size` enum values to corresponding agent tags, which are
+    represented as a map of `Text` keys and values. This is useful for categorizing or
+    tagging agents based on their size or purpose.
+
+- **Inputs**:
+    - `Size`: An enum type with the following possible values:
+        - `XLarge`
+        - `Large`
+        - `Medium`
+        - `Small`
+        - `Integration`
+        - `QA`
+        - `Hardfork`
+        - `Multi`
+        - `Perf`
+
+- **Outputs**:
+    - `toAgentTag`: A function that takes a `Size` value and returns a map of agent tags
+        (`Map Text Text`) corresponding to the given size.
+    - `toAgent`: A function that takes a `Size` value and returns an optional map
+        (`Optional (Map Text Text)`) of agent tags. If the resulting map is empty, it
+        returns `None`.
+
+-}
+
 let Prelude = ../External/Prelude.dhall
 
 let Map = Prelude.Map
