@@ -1,7 +1,7 @@
 {-|
 # Monorepo Module
 
-This module provides functionality to filter out jobs based on `scope` and `filter`. 
+This module provides functionality to filter out jobs based on `scope` and `filter`.
 It is designed to work with a monorepo setup where jobs are defined with specific tags and scopes.
 
 ## Features

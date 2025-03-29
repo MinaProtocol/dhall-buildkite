@@ -1,8 +1,8 @@
 {-|
 The `tag` module provides functionality to label annotated jobs with tags.
-These tags can then be used to filter jobs based on specific criteria, 
-making it easier to organize and manage jobs in a system. By associating 
-tags with jobs, users can efficiently query and group jobs for processing 
+These tags can then be used to filter jobs based on specific criteria,
+making it easier to organize and manage jobs in a system. By associating
+tags with jobs, users can efficiently query and group jobs for processing
 or analysis.
 
 Key Features:
@@ -10,10 +10,10 @@ Key Features:
 - Enable job filtering based on assigned tags.
 - Simplify job management and organization.
 
-Use this module to enhance the flexibility and scalability of job handling 
+Use this module to enhance the flexibility and scalability of job handling
 in your application.
 
-Example: 
+Example:
 
 <pre>
     ...

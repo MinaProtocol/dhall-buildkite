@@ -5,7 +5,7 @@ It includes functions for running commands, chaining them together, and
 running them in Docker containers. It also provides a way to handle
 caching through Docker.
 The module is designed to be used as a building block for higher-level
-command execution and caching strategies. 
+command execution and caching strategies.
 
 Example usage:
 <pre>

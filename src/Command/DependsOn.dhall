@@ -29,7 +29,7 @@ key.
 </pre>
 
 Above code is used in Base.dhall to define the `depends_on` field in a Buildkite
-pipeline. 
+pipeline.
 
 See TaggedKey.dhall for more details.
 
