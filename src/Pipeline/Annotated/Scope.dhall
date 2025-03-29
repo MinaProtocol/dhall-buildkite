@@ -35,11 +35,21 @@ let contains
 let capitalName =
           \(scope : Scope)
       ->  merge
-            { PullRequest = "PullRequest", Release = "Release", Nightly = "Nightly" }
+            { PullRequest = "PullRequest"
+            , Release = "Release"
+            , Nightly = "Nightly"
+            }
             scope
 
 let isStable =
           \(scope : Scope)
       ->  merge { PullRequest = False, Release = True, Nightly = True } scope
 
-in  { Type = Scope, capitalName = capitalName, isStable = isStable , toNatural = toNatural, equal = equal, hasAny = hasAny, contains = contains }
+in  { Type = Scope
+    , capitalName = capitalName
+    , isStable = isStable
+    , toNatural = toNatural
+    , equal = equal
+    , hasAny = hasAny
+    , contains = contains
+    }

@@ -23,7 +23,7 @@ let Size = ../../Command/Size.dhall
 let triggerCommand = ./TriggerCommand.dhall
 
 let commands
-    : List Tag.Type -> Text  -> Scope.Type -> List JobSpec.Type -> List Cmd.Type
+    : List Tag.Type -> Text -> Scope.Type -> List JobSpec.Type -> List Cmd.Type
     =     \(tags : List Tag.Type)
       ->  \(filterName : Text)
       ->  \(scope : Scope.Type)
@@ -32,10 +32,7 @@ let commands
             JobSpec.Type
             Cmd.Type
             (     \(job : JobSpec.Type)
-              ->  let targetScope = Scope.capitalName scope
-
-
-                  let dirtyWhen = SelectFiles.compile job.dirtyWhen
+              ->  let dirtyWhen = SelectFiles.compile job.dirtyWhen
 
                   let trigger =
                         triggerCommand "src/Jobs/${job.path}/${job.name}.dhall"
@@ -43,22 +40,21 @@ let commands
                   in        if Filter.contains job.tags tags
 
                       then  let cmd =
-                        
-                                  if Scope.hasAny scope job.scope 
+                                        if Scope.hasAny scope job.scope
 
                                   then  ''
                                           echo "Triggering ${job.name} because this is a release buildkite run"
                                           ${Cmd.format trigger}
                                         ''
 
-                                  else  if Scope.hasAny scope job.scope 
+                                  else  if Scope.hasAny scope job.scope
 
                                   then  ''
                                           echo "Triggering ${job.name} because this is a nightly buildkite run"
                                           ${Cmd.format trigger}
                                         ''
-                        
-                                  else if Scope.hasAny scope job.scope 
+
+                                  else  if Scope.hasAny scope job.scope
 
                                   then  ''
                                           if (cat _computed_diff.txt | egrep -q '${dirtyWhen}'); then
@@ -67,8 +63,6 @@ let commands
                                                 ${Cmd.format trigger}
                                           fi
                                         ''
-
-                        
 
                                   else  ''
                                           echo "Skipping ${job.name} because it does not run at any scope"
@@ -83,10 +77,9 @@ let commands
             )
             jobs
 
-
 in      \(filterName : Text)
-    ->  \(tags: List Tag.Type ) 
-    ->  \(scope : Scope.Type )
+    ->  \(tags : List Tag.Type)
+    ->  \(scope : Scope.Type)
     ->  \(jobs : List JobSpec.Type)
     ->  \(prefixCommands : List Cmd.Type)
     ->  let pipelineType =
@@ -101,8 +94,7 @@ in      \(filterName : Text)
                       Command.Config::{
                       , commands =
                           prefixCommands # commands tags filterName scope jobs
-                      , label =
-                          "Monorepo triage ${filterName}"
+                      , label = "Monorepo triage ${filterName}"
                       , key = "cmds-${filterName}"
                       , target = Size.Type.Multi
                       }

@@ -1,9 +1,10 @@
 let Prelude = ../../External/Prelude.dhall
+
 let Tag = ./Tag.dhall
 
 let List/any = Prelude.List.any
 
-let Filter = { Type = { name : Text , tags : List Tag.Type } }
+let Filter = { Type = { name : Text, tags : List Tag.Type } }
 
 let hasAny
     : Tag.Type -> List Tag.Type -> Bool
