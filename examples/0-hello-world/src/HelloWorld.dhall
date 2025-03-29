@@ -9,13 +9,12 @@ let Command = Base.Command.Base
 
 let Size = Base.Command.Size
 
-in  (Pipeline.build
+in  Pipeline.build
       [ Command.build
-            Command.Config::{
-            , commands = [ Cmd.run "echo hello world" ]
-            , label = "Hello world"
-            , key = "hello-world"
-            , target = Size.Multi
-            }
-        ]
-    )
+          Command.Config::{
+          , commands = [ Cmd.run "echo hello world" ]
+          , label = "Hello world"
+          , key = "hello-world"
+          , target = Size.Multi
+          }
+      ]

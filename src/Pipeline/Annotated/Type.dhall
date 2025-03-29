@@ -2,7 +2,7 @@
 -- information which is used to runtime pipeline handle.
 --
 
-let Command = ../../Command/Named.dhall
+let Command = ../../Command/Base.dhall
 
 let JobSpec = ./JobSpec.dhall
 

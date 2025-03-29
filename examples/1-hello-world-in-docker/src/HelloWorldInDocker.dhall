@@ -12,14 +12,12 @@ let Docker = Base.Command.Docker.Type
 let Size = Base.Command.Size
 
 in  Pipeline.build
-        [ Command.build
-            Command.Config::{
-            , commands = [ Cmd.run "echo hello world in docker" ]
-            , label = "Hello world In Docker"
-            , key = "hello-world-in-docker"
-            , target = Size.Multi
-            , docker = Some Docker::{
-              , image = "alpine:3.10"
-              }
-            }
-        ]
+      [ Command.build
+          Command.Config::{
+          , commands = [ Cmd.run "echo hello world in docker" ]
+          , label = "Hello world In Docker"
+          , key = "hello-world-in-docker"
+          , target = Size.Multi
+          , docker = Some Docker::{ image = "alpine:3.10" }
+          }
+      ]

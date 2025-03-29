@@ -12,7 +12,7 @@ latest_tag=$(git describe --tags $(git rev-list --tags --max-count=1))
 
 echo "Latest GitHub tag: $latest_tag"
 
-mkdir -p releases/$latest_tag
+mkdir -p releases/$latest_tag/docs
 
 cp release/template/index.html releases/index.html
 cp release/template/changelog.md releases/$latest_tag/changelog.md
@@ -24,7 +24,7 @@ output_file="releases/$latest_tag/package.dhall"
 for file in $(find src -type f -name "*.dhall"); do
     filename=$(basename "$file" .dhall)
     filepath=$(dirname "$file" | sed 's|^src/||')
-    filepath=$(echo "$filepath" | tr '/' '.')
+    import=$(echo "$filepath" | tr '/' '.')
 
     if [[ $counter -eq 1 ]]; then
       prefix="{"
@@ -32,8 +32,15 @@ for file in $(find src -type f -name "*.dhall"); do
       prefix=","
     fi
 
-    echo "$prefix $filepath.$filename = (./$file)" >> "$output_file"
+    echo "$prefix $import.$filename = (./$file)" >> "$output_file"
+
+    ./dhall-to-html.sh "$file" > "releases/$latest_tag/docs/$filepath.$filename.html"
     
+    cp "$file" "releases/$latest_tag/$filepath/$filename.dhall"
+
+
+    
+
     ((counter++))
 done
 echo "}" >> "$output_file"
