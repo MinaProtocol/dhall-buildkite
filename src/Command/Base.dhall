@@ -1,4 +1,21 @@
--- Commands are the individual command steps that CI runs
+{-|
+This module defines the base configuration and utilities for constructing
+Buildkite command steps in Dhall. It provides a `Config` type for specifying
+command step properties, a `build` function to convert the configuration into
+a Buildkite command step, and various dependencies and helper modules.
+
+Key components:
+- `Config.Type`: Represents the configuration for a Buildkite command step.
+- `Config.default`: Provides default values for the configuration.
+- `build`: A function that transforms a `Config.Type` into a `B/Command.Type`.
+
+Dependencies:
+- External modules like `Buildkite`, `Cmds`, `Decorate`, and various plugins.
+- Helper modules for handling retries, artifact paths, dependencies, and more.
+
+This module is intended to simplify the creation and management of Buildkite
+command steps by providing a structured and reusable configuration interface.
+-}
 
 let B = ../External/Buildkite.dhall
 
