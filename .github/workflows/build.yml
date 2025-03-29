@@ -17,7 +17,7 @@ jobs:
           - name: "Set up Dhall"
             run: |
                     sudo apt-get update
-                    sudo apt-get install -y dhall dhall-lsp-server
+                    sudo apt-get install -y dhall
                     dhall --version
 
           - name: "Syntax Check"
