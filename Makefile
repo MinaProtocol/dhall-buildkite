@@ -33,4 +33,8 @@ generate:
 
 release: clean all_checks generate upload
 
+upload_release:
+	aws s3 sync releases s3://dhall.packages.minaprotocol.com/buildkite/releases --acl public-read
+
+
 .PHONY: check_syntax check_lint check_format lint format all_checks clean generate upload release
