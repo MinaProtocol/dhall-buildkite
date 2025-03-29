@@ -1,25 +1,24 @@
 -- Autogenerates any pre-reqs for monorepo triage execution
 -- Keep these rules lean! They have to run unconditionally.
+let Base = ./Base.dhall
 
-let Base = ../../../src/Command/Base.dhall
+let Cmd = Base.Lib.Cmds
 
-let Cmd = ../../../src/Lib/Cmds.dhall
+let Pipeline = Base.Pipeline.Annotated.Type
 
-let Pipeline = ../../../src/Pipeline/Annotated/Type.dhall
+let JobSpec = Base.Pipeline.Annotated.JobSpec
 
-let JobSpec = ../../../src/Pipeline/Annotated/JobSpec.dhall
+let SelectFiles = Base.Lib.SelectFiles
 
-let SelectFiles = ../../../src/Lib/SelectFiles.dhall
+let Command = Base.Command.Base
 
-let Command = ../../../src/Command/Base.dhall
+let TaggedKey = Base.Command.TaggedKey
 
-let TaggedKey = ../../../src/Command/TaggedKey.dhall
-
-let Cmds = ../../../src/Lib/Cmds.dhall
+let Cmds = Base.Lib.Cmds
 
 let Docker = Cmds.Docker
 
-let Size = ../../../src/Command/Size.dhall
+let Size = Base.Command.Size.Type
 
 let scope = env:BUILDKITE_PIPELINE_MODE as Text ? "PullRequest"
 
@@ -43,7 +42,7 @@ let config
               ]
             , label = "Prepare monorepo triage"
             , key = "monorepo-${scope}-${filter}"
-            , target = Size.Type.Multi
+            , target = Size.Multi
             }
         ]
       }

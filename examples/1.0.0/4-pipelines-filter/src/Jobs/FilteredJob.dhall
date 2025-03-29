@@ -1,26 +1,26 @@
-let Base = ../../../src/Command/Base.dhall
+let Base = ../Base.dhall
 
-let Cmd = ../../../src/Lib/Cmds.dhall
+let Cmd = Base.Lib.Cmds
 
-let Pipeline = ../../../src/Pipeline/Annotated/Type.dhall
+let Pipeline = Base.Pipeline.Annotated.Type
 
-let JobSpec = ../../../src/Pipeline/Annotated/JobSpec.dhall
+let JobSpec = Base.Pipeline.Annotated.JobSpec
 
-let Scope = ../../../src/Pipeline/Annotated/Scope.dhall
+let Scope = Base.Pipeline.Annotated.Scope
 
-let Command = ../../../src/Command/Base.dhall
+let Command = Base.Command.Base
 
-let TaggedKey = ../../../src/Command/TaggedKey.dhall
+let TaggedKey = Base.Command.TaggedKey
 
-let S = ../../../src/Lib/SelectFiles.dhall
+let S = Base.Lib.SelectFiles
 
-let Cmds = ../../../src/Lib/Cmds.dhall
+let Cmds = Base.Lib.Cmds
 
 let Docker = Cmds.Docker
 
-let Size = ../../../src/Command/Size.dhall
+let Size = Base.Command.Size.Type
 
-let Tag = ./Tag.dhall
+let Tag = ../Filters/Tag.dhall
 
 in  Pipeline.build
       Pipeline.Config::{
@@ -38,7 +38,7 @@ in  Pipeline.build
             , commands = [ Cmd.run "echo from filtered job" ]
             , label = "Command from filtered job"
             , key = "filtered-command"
-            , target = Size.Type.Multi
+            , target = Size.Multi
             }
         ]
       }
