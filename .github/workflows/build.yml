@@ -26,4 +26,4 @@ jobs:
             run: make check_format
 
           - name: "Test Release"
-              run: make release
+            run: make release
