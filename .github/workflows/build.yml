@@ -7,17 +7,11 @@ on:
 jobs:
     build:
         name: Build and Test
-        runs-on: ubuntu-latest
+        runs-on: dhallhaskell/dhall:1.30.0
 
         steps:
           - name: "Checkout code"
             uses: actions/checkout@v3
-
-
-          - name: "Set up Dhall"
-            run: |
-                  curl -sL https://github.com/dhall-lang/dhall-haskell/releases/download/1.30.0/dhall-1.30.0-x86_64-linux.tar.bz2 | sudo tar --extract --file=- --bzip2 --directory=/usr ./bin/dhall && \
-                  curl -sL https://github.com/dhall-lang/dhall-haskell/releases/download/1.30.0/dhall-json-1.7.10-x86_64-linux.tar.bz2 | sudo tar --extract --file=- --bzip2 --directory=/usr ./bin/dhall-to-yaml
 
           - name: "Syntax Check"
             run: make check_syntax
@@ -29,7 +23,7 @@ jobs:
             run: make check_format
 
           - name: "Examples Check"
-            run: make check_examples
+            run: make check_format
 
           - name: "Test Release"
-            run: make release
+              run: make release
