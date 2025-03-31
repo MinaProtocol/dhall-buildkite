@@ -4,6 +4,9 @@ on:
     push:
     pull_request:
 
+env:
+  dhall_version: 1.41.1
+  dhall_yaml_version: 1.2.10
 jobs:
     build:
         name: Build and Test
@@ -13,15 +16,15 @@ jobs:
 
           - name: "Install Dhall"
             run: |
-              wget https://github.com/dhall-lang/dhall-haskell/releases/download/1.41.1/dhall-yaml-1.2.10-x86_64-linux.tar.bz2
+              wget https://github.com/dhall-lang/dhall-haskell/releases/download/${{ env.dhall_version }}/dhall-yaml-${{ env.dhall_yaml_version }}-x86_64-linux.tar.bz2
               tar --extract --file dhall-yaml-1.2.10-x86_64-linux.tar.bz2
-              chmod +x dhall-yaml-1.2.10-x86_64-linux/dhall-to-yaml
-              sudo mv dhall-yaml-1.2.10-x86_64-linux/dhall-to-yaml /usr/local/bin
+              chmod +x ./bin/dhall-to-yaml
+              sudo mv ./bin/dhall-to-yaml /usr/local/bin
 
-              wget https://github.com/dhall-lang/dhall-haskell/releases/download/1.41.1/dhall-1.41.1-x86_64-linux.tar.bz2
+              wget https://github.com/dhall-lang/dhall-haskell/releases/download/${{ env.dhall_version }}/dhall-${{ env.dhall_version }}-x86_64-linux.tar.bz2
               tar --extract --file dhall-1.41.1-x86_64-linux.tar.bz2
-              chmod +x dhall-1.41.1-x86_64-linux/dhall
-              sudo mv dhall-1.41.1-x86_64-linux/dhall /usr/local/bin
+              chmod +x ./bin/dhall
+              sudo mv ./bin/dhall /usr/local/bin
 
           - name: "Checkout code"
             uses: actions/checkout@v3
