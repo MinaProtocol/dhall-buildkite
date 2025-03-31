@@ -39,12 +39,43 @@ highlight_keywords() {
 
 # Extract only top comments (lines starting with '--' at the top of the file)
 extract_top_comments() {
-    awk '/^--/ { print substr($0, 3) } /^[^-]/ { exit }' "$dhall_file"
+    inside_comment_block=false
+    while IFS= read -r line; do
+        if [[ $line == "{-|"* ]]; then
+            inside_comment_block=true
+            continue
+        elif [[ $line == "-}"* ]]; then
+            inside_comment_block=false
+            continue
+        fi
+
+        if $inside_comment_block; then
+            if [[ $line == \#\#\#\#* ]]; then
+                # Convert lines starting with ### to <h5>
+                echo "$line" | sed 's/^####\(.*\)/<h6>\1<\/h6>/'
+            elif [[ $line == \#\#\#* ]]; then
+                # Convert lines starting with ### to <h5>
+                echo "$line" | sed 's/^###\(.*\)/<h5>\1<\/h5>/'
+            elif [[ $line == \#\#* ]]; then
+                # Convert lines starting with ## to <h4>
+                echo "$line" | sed 's/^##\(.*\)/<h4>\1<\/h4>/'
+            elif [[ $line == \#* ]]; then
+                # Convert lines starting with # to <h3>
+                echo "$line" | sed 's/^#\(.*\)/<h3>\1<\/h3>/'
+            elif [[ -z $line ]]; then
+                # If the line is empty, do not print anything
+                continue
+            else
+              # Remove leading '--' and trim whitespace
+                echo "$line </br>" | sed 's/-- //g' | sed 's/--//g' | sed 's/^\s*//g' | sed 's/\s*$//g'
+            fi
+        fi
+    done < "$dhall_file"
 }
 
 # Remove top comments from the Dhall file content
 remove_top_comments() {
-    awk 'BEGIN { found=0 } /^--/ { next } /^[^-]/ { if (!found) { found=1 }; print } /^$/ { if (found) print }' "$dhall_file"
+    sed '/{-|/,/-}/d' "$dhall_file"
 }
 
 # Generate HTML content using the template
@@ -87,11 +118,7 @@ remove_top_comments() {
     if [ -n "$comments" ]; then
         echo '        <section>'
         echo '            <h2>Description</h2>'
-
-        while IFS= read -r line; do
-            echo "            <p>${line}</p>"
-        done <<< "$comments"
-        
+        echo "            ${comments}"
         echo '        </section>'
     fi
 
