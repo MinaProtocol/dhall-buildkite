@@ -58,5 +58,5 @@ done
 
 echo "Release $latest_tag is ready to be published"
 
-REPLACEMENT="<li>\n<a href=\"./${latest_tag}/package.dhall\">${latest_tag}/package.dhall</a>\n<p>Import this version with:</p>\n<pre><code>https://minaprotocol.github.io/dhall-buildkite/${latest_tag}/package.dhall ${CHECKSUM}</code></pre>\n<p>\n<p><a href=\"./${latest_tag}/changelog.md\"> Changelog </a></p>\n<p><a href=\"./${latest_tag}/docs/package.dhall.html\"> Documentation </a></p>\n \n<p><a href=\"https://github.com/MinaProtocol/dhall-buildkite/blob/main/examples/${latest_tag}\"> Examples </a></p>\n</li>\n<!-- Add more releases as needed -->"
+REPLACEMENT="<li>\n<a href=\"./${latest_tag}/package.dhall\">${latest_tag}/package.dhall</a>\n<p>Import this version with:</p>\n<pre><code>https://minaprotocol.github.io/dhall-buildkite/${latest_tag}/package.dhall ${CHECKSUM}</code></pre>\n<p>\n<p><a href=\"./${latest_tag}/changelog.md\"> Changelog </a></p>\n<p><a href=\"./${latest_tag}/docs/package.dhall.html\"> Documentation </a></p>\n \n<p><a href=\"https://github.com/MinaProtocol/dhall-buildkite/tree/main/examples/${latest_tag}\"> Examples </a></p>\n</li>\n<!-- Add more releases as needed -->"
 sed -i "s|<!-- Add more releases as needed -->|${REPLACEMENT}|" releases/index.html
