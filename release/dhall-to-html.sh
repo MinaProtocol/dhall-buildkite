@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# filepath: /home/darek/work/minaprotocol/dhall-base/release/dhall-to-html.sh
-
 # Check if a file is provided
 if [ "$#" -ne 5 ]; then
     echo "This script generates an HTML file from a Dhall file."

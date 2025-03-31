@@ -31,7 +31,7 @@ This example defines a Buildkite pipeline with the following characteristics:
 
 ## Compatibility
 
-This example is **guaranteed to be compatible with version 1.0.0** of the `dhall-base` package. However, compatibility with newer versions is **not guaranteed**. If you are using a newer version, ensure that the `package.dhall` file referenced in the example is compatible with your version.
+This example is **guaranteed to be compatible with version 1.0.0** of the `dhall-buildkite` package. However, compatibility with newer versions is **not guaranteed**. If you are using a newer version, ensure that the `package.dhall` file referenced in the example is compatible with your version.
 
 ## Notes
 
