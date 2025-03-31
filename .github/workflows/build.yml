@@ -7,9 +7,22 @@ on:
 jobs:
     build:
         name: Build and Test
-        runs-on: dhallhaskell/dhall:1.30.0
+        runs-on: ubuntu-20.04
 
         steps:
+
+          - name: "Install Dhall"
+            run: |
+              wget https://github.com/dhall-lang/dhall-haskell/releases/download/1.41.1/dhall-yaml-1.2.10-x86_64-linux.tar.bz2
+              tar --extract --file dhall-yaml-1.2.10-x86_64-linux.tar.bz2
+              chmod +x dhall-yaml-1.2.10-x86_64-linux/dhall-to-yaml
+              sudo mv dhall-yaml-1.2.10-x86_64-linux/dhall-to-yaml /usr/local/bin
+
+              wget https://github.com/dhall-lang/dhall-haskell/releases/download/1.41.1/dhall-1.41.1-x86_64-linux.tar.bz2
+              tar --extract --file dhall-1.41.1-x86_64-linux.tar.bz2
+              chmod +x dhall-1.41.1-x86_64-linux/dhall
+              sudo mv dhall-1.41.1-x86_64-linux/dhall /usr/local/bin
+
           - name: "Checkout code"
             uses: actions/checkout@v3
 
