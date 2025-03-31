@@ -1,4 +1,4 @@
--- A Pipeline is a series of build steps --
+{- A Pipeline is a series of build steps -}
 let Command = ../Command/Base.dhall
 
 let Prelude = ../External/Prelude.dhall

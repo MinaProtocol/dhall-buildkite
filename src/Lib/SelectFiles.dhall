@@ -1,4 +1,5 @@
--- A DSL for representing file globbing; compiles into egrep-compatible regexp
+{- A DSL for representing file globbing; compiles into egrep-compatible regexp
+-}
 let Prelude = ../External/Prelude.dhall
 
 let P = Prelude

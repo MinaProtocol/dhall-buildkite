@@ -1,4 +1,6 @@
--- Decorate a comand step with echos to make it stand out
+{-
+ Decorate a comand step with echos to make it stand out
+-}
 let Prelude = ../External/Prelude.dhall
 
 let Cmd = ./Cmds.dhall

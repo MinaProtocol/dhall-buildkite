@@ -1,6 +1,6 @@
--- An Annotated Pipeline is a series of build steps with accompanying JobSpec,
--- information which is used to runtime pipeline handle.
---
+{- An Annotated Pipeline is a series of build steps with accompanying JobSpec,
+   information which is used to runtime pipeline handle.
+-}
 let Command = ../../Command/Base.dhall
 
 let JobSpec = ./JobSpec.dhall
