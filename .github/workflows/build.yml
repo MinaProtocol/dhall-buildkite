@@ -17,7 +17,7 @@ jobs:
           - name: "Install Dhall"
             run: |
               wget https://github.com/dhall-lang/dhall-haskell/releases/download/${{ env.dhall_version }}/dhall-json-${{ env.dhall_yaml_version }}-x86_64-linux.tar.bz2
-              tar --extract --file dhall-yaml-${{ env.dhall_yaml_version }}-x86_64-linux.tar.bz2
+              tar --extract --file dhall-json-${{ env.dhall_yaml_version }}-x86_64-linux.tar.bz2
               chmod +x ./bin/dhall-to-yaml
               sudo mv ./bin/dhall-to-yaml /usr/local/bin
 
