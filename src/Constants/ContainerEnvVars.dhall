@@ -12,7 +12,6 @@ Examples of common Buildkite environment variables:
 This list can be used to reference or validate the presence of these variables
 in your Buildkite scripts or configurations.
 -}
-
 [ "BUILDKITE_AGENT_ACCESS_TOKEN"
 , "BUILDKITE_PIPELINE_PROVIDER"
 , "BUILDKITE_BRANCH"

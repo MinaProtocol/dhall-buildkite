@@ -46,10 +46,10 @@ let prefixCommands =
       , Cmd.run "./generate-diff.sh > _computed_diff.txt"
       ]
 
-in      \(args : { filter : Filter.Type, scope : Scope.Type })
-    ->  BaseMonorepo
-          args.filter.name
-          args.filter.tags
-          args.scope
-          jobs
-          prefixCommands
+in  \(args : { filter : Filter.Type, scope : Scope.Type }) ->
+      BaseMonorepo
+        args.filter.name
+        args.filter.tags
+        args.scope
+        jobs
+        prefixCommands

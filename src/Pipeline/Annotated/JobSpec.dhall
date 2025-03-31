@@ -4,7 +4,6 @@ utilized to help organize and manage pipelines effectively. It provides
 functionality to collect, process, and structure job-related information
 to streamline pipeline execution.
 -}
-
 let SelectFiles = ../../Lib/SelectFiles.dhall
 
 let Scope = ./Scope.dhall
@@ -19,10 +18,10 @@ in  { Type =
         , tags : List Tag.Type
         }
     , default =
-        { path = "."
-        , name = ""
-        , scope = [ Scope.Type.PullRequest ]
-        , dirtyWhen = [] : List SelectFiles.Type
-        , tags = [] : List Tag.Type
-        }
+      { path = "."
+      , name = ""
+      , scope = [ Scope.Type.PullRequest ]
+      , dirtyWhen = [] : List SelectFiles.Type
+      , tags = [] : List Tag.Type
+      }
     }
