@@ -1,3 +1,17 @@
+{-|
+This is a simple list containing Buildkite environment variables. These variables
+are commonly used in Buildkite pipelines to access metadata about the build,
+pipeline, and agent. Each variable in the list corresponds to a specific piece
+of information provided by the Buildkite environment.
+
+Examples of common Buildkite environment variables:
+- `BUILDKITE_BUILD_ID`: The unique ID for the current build.
+- `BUILDKITE_PIPELINE_SLUG`: The slug of the pipeline being executed.
+- `BUILDKITE_AGENT_NAME`: The name of the agent running the build.
+
+This list can be used to reference or validate the presence of these variables
+in your Buildkite scripts or configurations.
+-}
 [ "BUILDKITE_AGENT_ACCESS_TOKEN"
 , "BUILDKITE_PIPELINE_PROVIDER"
 , "BUILDKITE_BRANCH"
@@ -30,6 +44,7 @@
 , "BUILDKITE_BUILD_CREATOR"
 , "BUILDKITE_COMMAND"
 , "BUILDKITE_PIPELINE_SLUG"
+, "BUILDKITE_PIPELINE_MODE"
 , "BUILDKITE"
 , "BUILDKITE_RETRY_COUNT"
 , "BUILDKITE_PIPELINE_DEFAULT_BRANCH"
@@ -46,8 +61,4 @@
 , "BUILDKITE_TIMEOUT"
 , "BUILDKITE_STEP_IDENTIFIER"
 , "NIGHTLY"
-, "NIX_CACHE_NAR_SECRET"
-, "NIX_CACHE_GCP_ID"
-, "NIX_CACHE_GCP_SECRET"
-, "SLOT_TX_END"
 ]

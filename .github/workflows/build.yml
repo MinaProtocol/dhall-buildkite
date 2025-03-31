@@ -1,0 +1,45 @@
+name: Build and Test
+
+on:
+    push:
+    pull_request:
+
+env:
+  dhall_version: 1.41.1
+  dhall_yaml_version: 1.7.10
+jobs:
+    build:
+        name: Build and Test
+        runs-on: ubuntu-20.04
+
+        steps:
+
+          - name: "Install Dhall"
+            run: |
+              wget https://github.com/dhall-lang/dhall-haskell/releases/download/${{ env.dhall_version }}/dhall-json-${{ env.dhall_yaml_version }}-x86_64-linux.tar.bz2
+              tar --extract --file dhall-json-${{ env.dhall_yaml_version }}-x86_64-linux.tar.bz2
+              chmod +x ./bin/dhall-to-yaml
+              sudo mv ./bin/dhall-to-yaml /usr/local/bin
+
+              wget https://github.com/dhall-lang/dhall-haskell/releases/download/${{ env.dhall_version }}/dhall-${{ env.dhall_version }}-x86_64-linux.tar.bz2
+              tar --extract --file dhall-${{ env.dhall_version }}-x86_64-linux.tar.bz2
+              chmod +x ./bin/dhall
+              sudo mv ./bin/dhall /usr/local/bin
+
+          - name: "Checkout code"
+            uses: actions/checkout@v3
+
+          - name: "Syntax Check"
+            run: make check_syntax
+
+          - name: "Lint Check"
+            run: make check_lint
+
+          - name: "Format Check"
+            run: make check_format
+
+          - name: "Examples Check"
+            run: make check_format
+
+          - name: "Test Release"
+            run: make release
