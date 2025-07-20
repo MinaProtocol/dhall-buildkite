@@ -18,4 +18,4 @@ let build
     : Config.Type -> AnnotatedType
     = \(c : Config.Type) -> { pipeline = Pipeline.build c.steps, spec = c.spec }
 
-in  { Config, build, Type = AnnotatedType }
+in  { Config = Config, build = build, Type = AnnotatedType }

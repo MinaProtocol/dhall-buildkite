@@ -18,10 +18,10 @@ in  { Type =
         , tags : List Tag.Type
         }
     , default =
-      { path = "."
-      , name = ""
-      , scope = [ Scope.Type.PullRequest ]
-      , dirtyWhen = [] : List SelectFiles.Type
-      , tags = [] : List Tag.Type
-      }
+        { path = "."
+        , name = ""
+        , scope = [ Scope.Type.PullRequest ]
+        , dirtyWhen = [] : List SelectFiles.Type
+        , tags = [] : List Tag.Type
+        }
     }

@@ -11,9 +11,9 @@
     , substitutions : List Text
     }
 , default =
-  { secrets-file = "./secrets.yml"
-  , provider = "summon-aws-secrets"
-  , environment = ""
-  , substitutions = [] : List Text
-  }
+    { secrets-file = "./secrets.yml"
+    , provider = "summon-aws-secrets"
+    , environment = ""
+    , substitutions = [] : List Text
+    }
 }

@@ -2,10 +2,18 @@
 This type represents a simple structure that binds together a `name` and a `key`.
 It is primarily used in the context of dependencies within a module.
 -}
-let TaggedKey = { Type = { name : Text, key : Text }, default = {=} }
+let TaggedKey = { Type = { name : Optional Text, key : Text }, default = {=} }
 
-let ofKey
+let keyOnly
     : Text -> TaggedKey.Type
-    = \(key : Text) -> { name = "", key }
+    = \(key : Text) -> { name = None Text, key = key }
 
-in  { Type = TaggedKey.Type, ofKey }
+let namedKey
+    : Text -> Text -> TaggedKey.Type
+    = \(name : Text) -> \(key : Text) -> { name = Some name, key = key }
+
+in  { Type = TaggedKey.Type
+    , keyOnly = keyOnly
+    , namedKey = namedKey
+    , default = {=}
+    }

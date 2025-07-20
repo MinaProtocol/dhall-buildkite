@@ -5,5 +5,8 @@
 -}
 { Type = { username : Text, password-env : Text, server : Text }
 , default =
-  { username = "o1botdockerhub", password-env = "DOCKER_PASSWORD", server = "" }
+    { username = "o1botdockerhub"
+    , password-env = "DOCKER_PASSWORD"
+    , server = ""
+    }
 }

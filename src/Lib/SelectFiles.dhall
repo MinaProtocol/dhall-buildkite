@@ -14,11 +14,11 @@ let FilePattern =
           , strictEnd : Bool
           }
       , default =
-        { dir = None (List PathPattern)
-        , exts = None (List Text)
-        , strictStart = False
-        , strictEnd = False
-        }
+          { dir = None (List PathPattern)
+          , exts = None (List Text)
+          , strictStart = False
+          , strictEnd = False
+          }
       }
 
 let strictlyStart
@@ -43,23 +43,23 @@ let contains
 
 let exactly
     : Text -> Text -> FilePattern.Type
-    = \(dir : Text) ->
-      \(ext : Text) ->
-        FilePattern::{
-        , dir = Some [ PathPattern.Lit dir ]
-        , exts = Some [ ext ]
-        , strictStart = True
-        , strictEnd = True
-        }
+    =     \(dir : Text)
+      ->  \(ext : Text)
+      ->  FilePattern::{
+          , dir = Some [ PathPattern.Lit dir ]
+          , exts = Some [ ext ]
+          , strictStart = True
+          , strictEnd = True
+          }
 
 let exactly_noext
     : Text -> FilePattern.Type
-    = \(dir : Text) ->
-        FilePattern::{
-        , dir = Some [ PathPattern.Lit dir ]
-        , strictStart = True
-        , strictEnd = True
-        }
+    =     \(dir : Text)
+      ->  FilePattern::{
+          , dir = Some [ PathPattern.Lit dir ]
+          , strictStart = True
+          , strictEnd = True
+          }
 
 let any
     : List Text -> Text
@@ -71,53 +71,56 @@ let compileExt
 
 let compileExts
     : List Text -> Text
-    = \(exts : List Text) ->
-        let exts_ = P.List.map Text Text compileExt exts
+    =     \(exts : List Text)
+      ->  let exts_ = P.List.map Text Text compileExt exts
 
-        in  "(" ++ any exts_ ++ ")"
+          in  "(" ++ any exts_ ++ ")"
 
 let compilePath
     : PathPattern -> Text
-    = \(path : PathPattern) ->
-        merge { Lit = \(text : Text) -> text, Any = ".*" } path
+    =     \(path : PathPattern)
+      ->  merge { Lit = \(text : Text) -> text, Any = ".*" } path
 
 let compilePaths
     : List PathPattern -> Text
-    = \(paths : List PathPattern) ->
-        let paths_ = P.List.map PathPattern Text compilePath paths
+    =     \(paths : List PathPattern)
+      ->  let paths_ = P.List.map PathPattern Text compilePath paths
 
-        in  P.Text.concat paths_
+          in  P.Text.concat paths_
 
 let compileFile
     : FilePattern.Type -> Text
-    = \(pattern : FilePattern.Type) ->
-        let dirPart =
-              P.Optional.fold
-                (List PathPattern)
-                pattern.dir
-                Text
-                compilePaths
-                ".*"
+    =     \(pattern : FilePattern.Type)
+      ->  let dirPart =
+                P.Optional.fold
+                  (List PathPattern)
+                  pattern.dir
+                  Text
+                  compilePaths
+                  ".*"
 
-        let extPart =
-              P.Optional.fold (List Text) pattern.exts Text compileExts ""
+          let extPart =
+                P.Optional.fold (List Text) pattern.exts Text compileExts ""
 
-        let startPart = if pattern.strictStart then "^" else ""
+          let startPart = if pattern.strictStart then "^" else ""
 
-        let endPart =
-              if        pattern.strictEnd
-                    ||  P.Bool.not (P.Optional.null (List Text) pattern.exts)
-              then  "\\\$"
-              else  ""
+          let endPart =
+                      if     pattern.strictEnd
+                         ||  P.Bool.not
+                               (P.Optional.null (List Text) pattern.exts)
 
-        in  startPart ++ dirPart ++ extPart ++ endPart
+                then  "\\\$"
+
+                else  ""
+
+          in  startPart ++ dirPart ++ extPart ++ endPart
 
 let compile
     : List FilePattern.Type -> Text
-    = \(patterns : List FilePattern.Type) ->
-        let patterns_ = P.List.map FilePattern.Type Text compileFile patterns
+    =     \(patterns : List FilePattern.Type)
+      ->  let patterns_ = P.List.map FilePattern.Type Text compileFile patterns
 
-        in  any patterns_
+          in  any patterns_
 
 let everythingExample = assert : compile [ everything ] === ".*"
 
@@ -150,14 +153,14 @@ let realisticExample =
               ]
         ===  "^buildkite/.*(\\.dhall)\\\$|^buildkite/Makefile\\\$|^buildkite/scripts/generate-jobs(\\.sh)\\\$"
 
-in      { compile
-        , everything
-        , contains
-        , exactly
-        , exactly_noext
-        , strictlyStart
-        , strictlyEnd
-        , strictly
-        , PathPattern
+in      { compile = compile
+        , everything = everything
+        , contains = contains
+        , exactly = exactly
+        , exactly_noext = exactly_noext
+        , strictlyStart = strictlyStart
+        , strictlyEnd = strictlyEnd
+        , strictly = strictly
+        , PathPattern = PathPattern
         }
     //  FilePattern
